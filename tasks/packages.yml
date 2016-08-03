@@ -1,10 +1,15 @@
 ---
+- stat: path='/opt/rb/rabbitmq-server_3.6.4-1_all.deb'
+  register: debFile
+  
 # Install required packages
+- name: download rabbit
+  get_url: url=https://www.rabbitmq.com/releases/rabbitmq-server/v3.6.4/rabbitmq-server_3.6.4-1_all.deb dest=/opt/ mode=0440  
+  when: debFile.stat.exists == False
 
 - name: install required packages
-  apt: pkg={{ item }} state=present
-  with_items:
-    - rabbitmq-server
+  apt: deb=/opt/rabbitmq-server_3.6.4-1_all.deb
+  when: debFile.stat.exists == False
 
 - name: install ssl-cert
   apt: pkg=ssl-cert state=present
