@@ -1,5 +1,5 @@
 ---
-- stat: path='/opt/rb/rabbitmq-server_3.6.4-1_all.deb'
+- stat: path='/opt/rabbitmq-server_3.6.4-1_all.deb'
   register: debFile
   
 # Install required packages
